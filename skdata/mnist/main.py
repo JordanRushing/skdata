@@ -45,22 +45,20 @@ def main_clean_up():
     MNIST().clean_up()
 
 
-
 def main():
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
     if len(sys.argv) <= 1:
-        print usage
+        print(usage)
         return 1
     else:
         try:
             fn = globals()['main_' + sys.argv[1]]
         except:
-            print 'command %s not recognized' % sys.argv[1]
-            print usage
+            print('command %s not recognized' % sys.argv[1])
+            print(usage)
             return 1
         return fn()
 
 
 if __name__ == '__main__':
     sys.exit(main())
-

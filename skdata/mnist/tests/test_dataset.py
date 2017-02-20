@@ -12,4 +12,3 @@ def test_MNIST():
     assert M.meta[69999] == dict(id=69999, split='test', label=6), M.meta[69999]
     assert len(M.meta) == 70000
 
-

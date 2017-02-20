@@ -49,6 +49,7 @@ FILE_SIZES_PRETTY = dict(
     test_labels='4.5K',
     )
 
+
 def _read_int32(f):
     """unpack a 4-byte integer from the current position in file f"""
     s = f.read(4)
@@ -207,4 +208,3 @@ class MNIST(object):
                 for j, l in enumerate(arrays['test_labels'])])
         assert len(meta) == 70000, (i, len(meta))
         return meta
-
