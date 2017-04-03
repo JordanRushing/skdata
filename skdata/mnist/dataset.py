@@ -85,12 +85,12 @@ def _read_header(f, debug=False, fromgzip=None):
     if magic in (2049, 2051):
         logger.info('Reading on big-endian machine.')
         endian = 'big'
-        next_int32 = lambda : _read_int32(f)
+        next_int32 = lambda: _read_int32(f)
     elif _reverse_bytes_int32(magic) in (2049, 2051):
         logger.info('Reading on little-endian machine.')
         magic = _reverse_bytes_int32(magic)
         endian = 'little'
-        next_int32 = lambda : _reverse_bytes_int32(_read_int32(f))
+        next_int32 = lambda: _reverse_bytes_int32(_read_int32(f))
     else:
         raise IOError('MNIST data file appears to be corrupt')
 
@@ -169,7 +169,7 @@ class MNIST(object):
                 if download_if_missing:
                     logger.warn("Downloading %s %s: %s => %s" % (
                         FILE_SIZES_PRETTY[role], role, url, dest))
-                    downloader = urllib.urlopen(url)
+                    downloader = urllib.request.urlopen(url)
                     data = downloader.read()
                     tmp = open(dest, 'wb')
                     tmp.write(data)
@@ -202,9 +202,9 @@ class MNIST(object):
         assert len(arrays['train_images']) == len(arrays['train_labels'])
         assert len(arrays['test_images']) == len(arrays['test_labels'])
         meta = [dict(id=i, split='train', label=l)
-                for i,l in enumerate(arrays['train_labels'])]
+                for i, l in enumerate(arrays['train_labels'])]
         i = len(meta)
         meta.extend([dict(id=i + j + 1, split='test', label=l)
-                for j, l in enumerate(arrays['test_labels'])])
+                    for j, l in enumerate(arrays['test_labels'])])
         assert len(meta) == 70000, (i, len(meta))
         return meta
